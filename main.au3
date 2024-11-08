@@ -1,7 +1,7 @@
-; C?u hình du?ng d?n file TXT
+
 Global $txtFile = "D:\data_reddit\data.txt"  ; duong dan data
 
-; Hàm d?c d? li?u t? file TXT
+; fetch data tu file TXT
 Func ReadTXT($filePath)
     Local $file = FileOpen($filePath, 0)
     If $file = -1 Then
@@ -28,12 +28,12 @@ Func ReadTXT($filePath)
 EndFunc
 
 Func PostToReddit($title, $body)
-    ; Mo Firefõ
+    ; open Firefõ
 	TrayTip("Bat dau thuc thi - Firefox Ver.", "AutoPost Reddit", 10, 1)
 	Sleep(3000)
 	TrayTip("", "", "")
     ShellExecute("C:\Program Files\Mozilla Firefox\firefox.exe", "https://www.reddit.com/submit")
-
+	; ShellExecute("C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", "https://www.reddit.com/submit") ; danh cho trinh duyet edge
     Sleep(6000) ; doi load trang
 
 
@@ -46,13 +46,13 @@ Func PostToReddit($title, $body)
 	Send("{ENTER}")
 Sleep(4000)
 	; nhay toi truong title
-	Send("{TAB 19}")
+	Send("{TAB 18}")
 
 	Send($title)
 	Sleep(1000)
 
 	; nhay den truong body
-	Send("{TAB}")
+	Send("{TAB 2}")
     Send($body)
     Sleep(1000)
 
