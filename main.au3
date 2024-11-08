@@ -1,7 +1,7 @@
-; C?u hÏnh du?ng d?n file TXT
+; C?u h√¨nh du?ng d?n file TXT
 Global $txtFile = "D:\data_reddit\data.txt"  ; duong dan data
 
-; H‡m d?c d? li?u t? file TXT
+; H√†m d?c d? li?u t? file TXT
 Func ReadTXT($filePath)
     Local $file = FileOpen($filePath, 0)
     If $file = -1 Then
@@ -28,17 +28,20 @@ Func ReadTXT($filePath)
 EndFunc
 
 Func PostToReddit($title, $body)
-    ; Mo Firefı
+    ; Mo Firef√µ
+	TrayTip("Bat dau thuc thi - Firefox Ver.", "AutoPost Reddit", 10, 1)
+	Sleep(3000)
+	TrayTip("", "", "")
     ShellExecute("C:\Program Files\Mozilla Firefox\firefox.exe", "https://www.reddit.com/submit")
 
     Sleep(6000) ; doi load trang
 
 
-; nhay tab toi truogn chon subreddit
+; nhay tab toi truogn chon subreddit (dropdown list opt_)
     Send("{TAB 12}")
 
 	Send("{space}")
-	Sleep(1500)
+	Sleep(3000)
 	Send("{DOWN}")
 	Send("{ENTER}")
 Sleep(4000)
@@ -53,14 +56,15 @@ Sleep(4000)
     Send($body)
     Sleep(1000)
 
-    ; –ang b‡i
-    Send("{TAB 4}") ; Di chuy?n d?n n˙t "Post"
+    ; √êang b√†i
+    Send("{TAB 4}") ; nhay den nut post
 
     Send("{ENTER}")
     Sleep(5000)
+	MouseClick("left", 800, 600) ; check this
 EndFunc
 
-; –?c d? li?u t? TXT v‡ dang t?ng b‡i lÍn Reddit
+; doc du lieu
 Local $posts = ReadTXT($txtFile)
 For $i = 0 To UBound($posts) - 1
     PostToReddit($posts[$i][0], $posts[$i][1])
